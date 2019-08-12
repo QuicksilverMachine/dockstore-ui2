@@ -94,7 +94,6 @@ describe('Dockstore Home', () => {
         });
       });
       cy.get('mat-expansion-panel').should('have.length', 1);
-      cy.get('.mat-expansion-indicator').first().click();
       cy.get('[data-cy=sync-with-github-org]').first().click();
       cy.get('mat-expansion-panel').should('have.length', 1);
       // Now 2 repos
