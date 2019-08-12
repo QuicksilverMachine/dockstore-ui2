@@ -43,22 +43,6 @@ jobs:
           root: .
           paths:
             - .
-  integration_test_1:
-    executor: integration_test_exec
-    working_directory: ~/repo
-    steps:
-      - setup_integration_test
-      - run:
-          name: Test
-          command: bash -i -c 'npx cypress run --record --config numTestsKeptInMemory=1 --spec cypress/integration/group1/**/*'
-  integration_test_2:
-    executor: integration_test_exec
-    working_directory: ~/repo
-    steps:
-      - setup_integration_test
-      - run:
-          name: Test
-          command: bash -i -c 'npx cypress run --record --config numTestsKeptInMemory=1 --spec cypress/integration/group2/**/*'
   integration_test_3:
     executor: integration_test_exec
     working_directory: ~/repo
@@ -66,7 +50,7 @@ jobs:
       - setup_integration_test
       - run:
           name: Test
-          command: bash -i -c 'npx cypress run --record --config numTestsKeptInMemory=1 --spec cypress/integration/immutableDatabaseTests/**/*'
+          command: bash -i -c 'npx cypress run --record --config numTestsKeptInMemory=1 --spec cypress/integration/immutableDatabaseTests/services.ts'
   upload_to_s3:
     working_directory: ~/repo
     docker:
@@ -135,18 +119,6 @@ workflows:
           filters:
             tags:
               only: /.*/
-      - integration_test_1:
-          filters:
-            tags:
-              only: /.*/
-          requires:
-            - lint_unit_test_coverage
-      - integration_test_2:
-          filters:
-            tags:
-              only: /.*/
-          requires:
-            - lint_unit_test_coverage
       - integration_test_3:
           filters:
             tags:
@@ -156,8 +128,6 @@ workflows:
       # Upload builds for tags to s3. We can add branches later
       - upload_to_s3:
           requires:
-            - integration_test_1
-            - integration_test_2
             - integration_test_3
           filters:
             tags:
