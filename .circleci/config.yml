@@ -22,23 +22,8 @@ jobs:
           name: Install dependencies
           command: bash -i -c 'npm ci'
       - run:
-          name: Check dependencies
-          command: bash -i -c 'npm ls'
-      - run:
-          name: Lint
-          command: bash -i -c 'npm run lint'
-      - run:
           name: Build
           command: bash -i -c 'npm run build.prod'
-      - run:
-          name: Install codecov
-          command: bash -i -c 'npm i --no-save codecov'
-      - run:
-          name: Unit Test
-          command: bash -i -c 'npx ng test --progress=false --watch=false --code-coverage --browsers ChromeHeadless'
-      - run:
-          name: Codecov
-          command: bash -i -c 'npx codecov'
       - persist_to_workspace:
           root: .
           paths:
