@@ -24,6 +24,9 @@ module.exports = function (config) {
     angularCli: {
       environment: 'dev'
     },
+    parallelOptions: {
+      executors: 6
+    },
     reporters: ['kjhtml', 'spec'],
     port: 9876,
     colors: true,
