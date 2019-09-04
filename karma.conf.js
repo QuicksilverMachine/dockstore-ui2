@@ -25,7 +25,7 @@ module.exports = function (config) {
       environment: 'dev'
     },
     parallelOptions: {
-      executors: 6
+      executors: 3
     },
     reporters: ['kjhtml', 'spec'],
     port: 9876,
